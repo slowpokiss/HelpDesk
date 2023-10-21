@@ -7,6 +7,13 @@ export default class AddForm {
     this.getAllCards = this.getAllCards.bind(this);
     this.deleteCard = this.deleteCard.bind(this);
 
+    document.addEventListener('DOMContentLoaded', async(ev) => {
+      ev.preventDefault()
+      fetch('http://localhost:7077?method=loadPage', {
+        method: 'GET'
+      })
+    })
+
     this.form.addEventListener("submit", async (ev) => {
       ev.preventDefault();
       const body = new FormData(this.form);
@@ -86,20 +93,56 @@ export default class AddForm {
       </div>
     </div>
   </div>
+  `)
 
-  <div class="card-description">
-    ${response.description}
-  </div>`)
+
+  // <div class="card-description">
+  // </div>
+  
     this.cardList.appendChild(maket);
+
     maket.querySelector('.action-delete').addEventListener('click', (ev) => {
       ev.preventDefault();
       this.deleteCard(maket.querySelector('.card-checkbox').id)
     })
+
+    maket.addEventListener('click', async(ev) => {
+      if (!ev.target.classList.contains('card-checkbox') && !ev.target.classList.contains('action')) {
+        const card = await this.getCard(maket.querySelector('.card-checkbox').id);
+
+        const cardDesc = maket.querySelector('.card-description')
+        if (cardDesc === null) {
+          maket.insertAdjacentHTML('beforeend', `<div class="card-description">${card.description}</div>`)
+        } else {
+          cardDesc.remove();
+        }
+      }
+    })
+  }
+
+  async getCard(id) {
+    return fetch(`http://localhost:7077?method=ticketById&id=${id}`, {
+      method: 'GET'
+    })
+    .then(response => {
+      if (response.ok) {
+        return response.json()
+      } else {
+        console.log(`Request failed with error ${xhr.status}`)
+      }
+    })
+    .then(data => {
+      return data
+    })
+    .catch(error => {
+      console.error(error);
+      throw error; 
+    });
   }
 
   async deleteCard(id) {
     try {
-      await fetch(`http://localhost:7077?method=deleteById&${id}=<${id}>`, {
+      await fetch(`http://localhost:7077?method=deleteById&id=${id}`, {
         method: 'GET'
       });
 
@@ -135,7 +178,6 @@ export default class AddForm {
   update(list) {
     this.cardList.innerHTML = '';
     list.forEach(el => {
-
       this.addCard(el)
     });
   }

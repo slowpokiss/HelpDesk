@@ -26,9 +26,10 @@
 
 .list {
     width: 1000px;
+    min-height: 100px;
     display: flex;
     flex-direction: column;
-    padding: 20px;
+    border: 2px solid black;
 }
 
 .list-add {
@@ -49,6 +50,7 @@
     flex-direction: column;
     border: 3px solid black;
     border-bottom: none;
+    user-select: none;
 }
 
 .card:last-child {
@@ -69,12 +71,9 @@
     align-items: center;
 }
 
-.card-title {
-    user-select: none;
-}
 
 .card-description {
-    display: none;
+    padding: 30px 80px;
 }
 
 .card-date {
