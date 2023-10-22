@@ -73,7 +73,7 @@
 
 
 .card-description {
-    padding: 30px 80px;
+    padding: 20px 80px;
 }
 
 .card-date {
@@ -146,10 +146,13 @@
 }
 
 .popup-input {
-    margin-top: 15px;
     font-size: 30px;
-    border-radius: 20px;
     padding: 5px 20px
+}
+
+.del-form-title {
+    text-align: center;
+    margin-bottom: 30px;
 }
 
 .popup-actions {
@@ -160,6 +163,7 @@
 }
 
 .popup-button {
+    display: block;
     font-size: 30px;
     padding: 20px 25px;
     border: 2px solid black;
@@ -176,7 +180,7 @@
     background-color: #dedede;
 }
 
-.popup {
+.popup, .del-popup, .edit-popup{
     position: fixed;
     top: 0;
     left: 0;
@@ -188,17 +192,22 @@
     transition: 0.5s all;
 }
 
-.popup.active { 
+.popup.active,  .del-popup.active, .edit-popup.active{ 
     opacity: 1; 
     pointer-events: all; 
     transition: 0.5s all;
+}
+
+.form-title {
+    text-align: center;
+    margin: 20px 0;
 }
 
 .list-popup {
     display: flex;
     gap: 20px;
     flex-direction: column;
-    height: 450px;
+    height: 500px;
     justify-content: center;
 
     position: absolute;
@@ -211,17 +220,42 @@
     transition: 0.5s all;
 }
 
-.list-popup.active { 
+.list-popup.active, .del-form.active, .edit-form.active { 
     transform: translate(-50%, -50%) scale(1); 
     transition: 0.5s all;
 }
 
-.arrow {
-    width: fit-content;
-    font-size: 25px;
-	position: relative;
-    color: rgb(192, 31, 31);
-	border-radius: 3px;   
-    font-family: "FreeMono", monospace;
-    font-weight: normal;
+.del-form {
+    min-width: 400px;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    border: 3px solid black;
+    border-radius: 30px;
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0); 
+    background: #fff;
+    min-width: 700px;
+    padding: 25px;
+    transition: 0.5s all;
+}
+
+.edit-form {
+    display: flex;
+    gap: 20px;
+    flex-direction: column;
+    height: 500px;
+    justify-content: center;
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0); 
+    background: #fff;
+    min-width: 700px;
+    padding: 25px;
+    transition: 0.5s all;
 }
