@@ -8,11 +8,7 @@
   "scripts": {
     "start": "webpack serve --config webpack.dev.js",
     "build": "webpack --config webpack.prod.js",
-    "lint": "eslint . --fix",
-    "e2e": "jest --testPathPattern=./e2e/ --runInBand",
-    "show:coverage": "live-server coverage/lcov-report",
-    "preshow:dist": "yarn build",
-    "show:dist": "live-server dist"
+    "lint": "eslint . --fix"
   },
   "license": "MIT",
   "devDependencies": {
